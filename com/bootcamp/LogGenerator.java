@@ -126,7 +126,6 @@ public class LogGenerator {
             }
             int lastDotIndex = templateFile.lastIndexOf('.');
             String type = templateFile.substring(lastDotIndex + 1);
-            System.out.println(content);
 
             send2DT(content, type, templateFile);
             //Files.write(Paths.get(DIRECTORY_PATH + "/" + logFile), (content + "\n").getBytes(), StandardOpenOption.CREATE, StandardOpenOption.APPEND);
@@ -143,7 +142,6 @@ public class LogGenerator {
             
             int lastDotIndex = templateFile.lastIndexOf('.');
             String type = templateFile.substring(lastDotIndex + 1);
-            System.out.println(content);
             send2DT(content, type, templateFile);
             //System.out.println(content);
             //Files.write(Paths.get(DIRECTORY_PATH + "/" + logFile), (content + "\n").getBytes(), StandardOpenOption.CREATE, StandardOpenOption.APPEND);
@@ -155,15 +153,11 @@ public class LogGenerator {
 
     private static void send2DT(String content, String type, String templateFile) {
         String contentType = "text/plain; charset=utf-8";
-        if ( type == "json") {
+        if (type.equals("json")) {
             contentType = "application/json; charset=utf-8";
         }
         //String acceptHeader = contentType + "; charset=utf-8";
         String acceptHeader = "application/json; charset=utf-8";
-        System.out.println(acceptHeader);
-        //                 .header("accept", "application/json; charset=utf-8")
-        System.out.println(contentType);
-        System.out.println(dtUrlEndPoint);
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(dtUrlEndPoint))
                 .header("Accept", acceptHeader)
@@ -172,8 +166,6 @@ public class LogGenerator {
                 .POST(BodyPublishers.ofString(content))
                 .build();
         
-        System.out.println(request.toString());
-
         try {
             HttpResponse<String> response = client.send(request, BodyHandlers.ofString());
             // Handle the response
