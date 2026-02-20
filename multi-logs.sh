@@ -1,4 +1,5 @@
 #!/bin/bash
+set -eo pipefail
 
 ### Creates log directories
 # set the the directory path for the logs
@@ -9,9 +10,7 @@ directory_path="/var/log/multilog"
 user=$(whoami)
 
 # check if the directory exists, if not create it with ownership of the user running it
-if [ ! -d "$directory_path" ]; then
-   sudo mkdir -p "$directory_path" > /dev/null 2>&1 && sudo chown -R $user "$directory_path"
-fi
+sudo mkdir -p "$directory_path" > /dev/null 2>&1 && sudo chown -R $user "$directory_path"
 # --------- 
 
 # generating info logs

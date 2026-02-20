@@ -18,6 +18,12 @@ spec:
         image: alikingdom/loggeneator:0.7
         env:
         - name: DT_URL
-          value: {YOUR_DT_URL}
+          valueFrom:
+            secretKeyRef:
+              name: dt-details
+              key: DT_ENDPOINT
         - name: DT_LOG_INGEST_TOKEN
-          value: {YOUR_DT_LOG_INGEST_TOKEN}
+          valueFrom:
+            secretKeyRef:
+              name: dt-details
+              key: DT_LOG_INGEST_TOKEN
